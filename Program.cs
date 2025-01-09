@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using VotingApp.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<VotingAppContext>(options => options.UseSqlServer(ConnectionString));
 
 var app = builder.Build();
 
@@ -22,7 +28,8 @@ app.UseAuthorization();
 
 #pragma warning disable ASP0014
 // Use the endpoint routing middleware
-app.UseEndpoints(endpoints => {
+app.UseEndpoints(endpoints =>
+{
     endpoints.MapControllers();
     endpoints.MapControllerRoute(
         name: "default",

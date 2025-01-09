@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Create Votes Page";
+
+}
+@model VotingApp.Areas.Admin.Models.VoteModel
+
+
+
+@if (Model.voteOptions == null || Model.voteOptions.Count <= 0)
+{
+    Model.voteOptions = new List<VoteOptionModel> {
+new VoteOptionModel { optionName = "" },
+new VoteOptionModel { optionName = "" },
+new VoteOptionModel { optionName = "" },
+new VoteOptionModel { optionName = "" }
+};
+}
+
+<section id="nav-vote-form"
+    class="w-full h-content bg-gradient-to-t from-[#1f2738] to-[#cde1d9] flex flex-row justify-between px-20 py-10 rounded-b-3xl">
+
+    <div class="flex justify-start items-center overflow-hidden">
+        <a href="./List" id="user-nav" class="duration-300 ease-in-out text-xl text-c-primary -translate-x-[3rem] ">
+            User
+        </a>
+        <button id="user-menu-arrow" style="font-size: 1.25rem;" class=" material-symbols-rounded -translate-x-[2.5rem] 
+             text-c-primary duration-300 ease-in-out select-none text-2xl">
+            double_arrow
+        </button>
+    </div>
+
+    <div class="text-3xl text-c-primary">Vote</div>
+    <div class="invisible"></div>
+</section>
+
+<section class="bg-white rounded-3xl mx-10 my-20 px-8 py-4 md:w-fit md:mx-auto md:my-10 md:px-5 md:py-8 ">
+
+    <form id="vote-form" class="flex flex-col justify-center items-start gap-4" method="post"
+        enctype="multipart/form-data" asp-controller="Vote" asp-action="Save">
+        <input type="hidden" asp-for="voteId" />
+
+        <div class="flex flex-col items-start w-full gap-3 md:w-[50rem] md:gap-[1.125rem]">
+            <label class="text-xl" for="voting-subject">Voting Subject</label>
+            <div class="flex flex-col items-start w-full gap-2">
+                <input asp-for="votingSubject"
+                    class="w-full text-base px-4 rounded-2xl bg-c-primary text-slate-400 h-14 md:h-16"
+                    placeholder="Enter voting subject" type="text" id="voting-subject" />
+                <span class="text-red-800" asp-validation-for="votingSubject"></span>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-start w-full gap-3 md:w-[50rem] md:gap-[1.125rem]">
+            <label class="text-xl" for="votingQuestion">Voting Question</label>
+            <div class="flex flex-col items-start w-full gap-2">
+                <input asp-for="votingQuestion"
+                    class="w-full text-base px-4 rounded-2xl bg-c-primary text-slate-400 h-14 md:h-16"
+                    placeholder="Enter voting question" type="text" id="votingQuestion" />
+                <span class="text-red-800" asp-validation-for="votingQuestion"></span>
+            </div>
+
+        </div>
+
+        @for (int i = 0; i < Model.voteOptions.Count; i++)
+        {
+
+            <div class="vote-option flex flex-col items-start w-full gap-3 md:w-[50rem] md:gap-[1.125rem]">
+                <input type="hidden" asp-for="@Model.voteOptions[i].optionId" />
+                <label class="text-xl" for="voting-option">Voting Option @(i + 1)</label>
+                <div class="flex flex-col items-start w-full gap-2">
+                    <input class="w-full text-base px-4 rounded-2xl bg-c-primary text-slate-400 h-14 md:h-16"
+                        placeholder="Enter option @(i + 1)" type="text" asp-for="@Model.voteOptions[i].optionName" />
+                    <span class="text-red-800" asp-validation-for="voteOptions[@i].optionName"></span>
+                </div>
+            </div>
+        }
+
+        <div id="form-btn" class="w-full flex justify-start items-start gap-3">
+            <input class="w-full text-xl px-5 rounded-2xl bg-orange-300 text-slate-800 h-14 md:h-16" type="submit"
+                value="Submit" />
+        </div>
+    </form>
+</section>
+
+
+@section Scripts {
+
+
+    <script>
+
+
+
+    </script>
+}

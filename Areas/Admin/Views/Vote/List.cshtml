@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Admin Home Page";
+}
+
+<section
+    class="w-full h-content bg-gradient-to-t from-[#1f2738] to-[#cde1d9] flex flex-col justify-center items-start px-20 py-10 gap-1.5 md:gap-2.5 relative rounded-b-3xl">
+    <div class="flex justify-start items-center overflow-hidden">
+        <a href="./List" id="user-nav" class="duration-300 ease-in-out text-xl text-c-primary -translate-x-[3rem] ">
+            User
+        </a>
+        <button id="user-menu-arrow" style="font-size: 1.25rem;" class=" material-symbols-rounded -translate-x-[2.5rem] 
+             text-c-primary duration-300 ease-in-out select-none text-2xl">
+            double_arrow
+        </button>
+    </div>
+    <div class="flex justify-between items-center w-full">
+        <h1 class="text-xl text-c-primary">Vote</h1>
+        <a href="./Edit" class="flex justify-center items-center text-xl">
+            <span class="text-c-primary hidden md:inline">Get more votes</span>
+            <span class="material-symbols-rounded text-c-primary">arrow_right</span>
+        </a>
+    </div>
+    <div class="flex flex-col gap-0.5 items-center w-full">
+        <h5 class="text-base font-semibold text-c-primary">Total Votes</h5>
+        <p class="font-semibold text-xl text-c-primary">80 vote(s)</p>
+    </div>
+
+
+</section>
+<div class="relative h-24 flex justify-center items-center ">
+    <a id="create-vote-btn" href="./Edit"
+        class="w-fit h-content text-2xl px-4 py-3 bg-[#cde1d9] border-8 border-c-primary  rounded-full absolute -top-6 flex justify-center items-center">
+        <h4 class="text-[#1f2738]">Create New Vote</h4>
+    </a>
+</div>
+
+
+<section id="vote-list" class=" w-full md:w-[75%] m-auto h-content flex flex-col px-32 py-0 gap-8">
+    <div class="w-full h-content flex flex-col justify-center items-start bg-neutral-100 px-5 py-8 rounded-3xl">
+        <div class="w-content flex justify-center items-center py-2 px-[1.125rem] rounded-full bg-[#DCCFCF]">
+            <span>dd/mm/yyyy</span>
+        </div>
+        <div class="w-full flex justify-between items-center px-[1.125rem]">
+            <p>Vote For Best Technology in 2023</p>
+            <div class="flex flex-col gap-2 items-center">
+                <p>Voters 3000<sub>/votes</sub></p>
+                <div class="w-content flex justify-center items-center py-2 px-[1.125rem] rounded-full bg-[#DCCFCF]">
+                    <span>show my result</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuArrow = document.getElementById('menu-arrow');
+            const adminLink = document.getElementById('admin-nav');
+
+            menuArrow.addEventListener('mousedown', () => {
+                menuArrow.classList.toggle('-translate-x-[3.56rem]');
+
+                setTimeout(() => {
+                    menuArrow.classList.toggle('duration-300');
+                    menuArrow.classList.toggle('rotate-180');
+
+                    setTimeout(() => {
+                        menuArrow.classList.toggle('duration-300');
+                    }, 100);
+                }, 350);
+
+                setTimeout(() => {
+                    adminLink.classList.toggle('-translate-x-[3.56rem]');
+                }, 100);
+            });
+        });
+    </script>
+}
